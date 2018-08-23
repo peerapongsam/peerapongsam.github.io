@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "HXP446TCCB.com.pantip.ios.Pantip.com",
+                "paths": [ "*"]
+            }
+        ]
+    }
+}
