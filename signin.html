@@ -1,0 +1,59 @@
+<html>
+  <header>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      button {
+        margin: 0 auto;
+      }
+      pre {
+        background-color: #eaeaea;
+        white-space: pre-wrap; /* Since CSS 2.1 */
+        white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+        white-space: -pre-wrap; /* Opera 4-6 */
+        white-space: -o-pre-wrap; /* Opera 7 */
+        word-wrap: break-word; /* Internet Explorer 5.5+ */
+      }
+    </style>
+  </header>
+  <body style="margin-top: 50px">
+    <div style="text-align: center">
+      <button onclick='socialAuth({"provider":"google"})'>
+        Sign in with Google
+      </button>
+    </div>
+    <pre id="result"></pre>
+
+    <script>
+      function socialAuth(data) {
+        // Call Android interface
+        console.log(data);
+        if (window.AnalyticsWebInterface) {
+          window.AnalyticsWebInterface.socialAuth(JSON.stringify(data));
+        } else if (
+          window.webkit &&
+          window.webkit.messageHandlers &&
+          window.webkit.messageHandlers.firebase
+        ) {
+          const message = {
+            command: 'socialAuth',
+            params: JSON.stringify(data)
+          };
+          // Call iOS interface
+          window.webkit.messageHandlers.firebase.postMessage(message);
+        } else {
+          // No Android or iOS interface found
+          console.log('No native APIs found.');
+        }
+      }
+
+      function socialLogin(data) {
+        console.log(data);
+        document.getElementById('result').textContent = JSON.stringify(
+          data,
+          null,
+          2
+        );
+      }
+    </script>
+  </body>
+</html>
