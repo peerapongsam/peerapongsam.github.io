@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      button {
+        margin: 0 auto;
+      }
+      pre {
+        outline: 1px solid #ccc;
+        padding: 5px;
+        margin: 5px;
+        white-space: pre-wrap; /* Since CSS 2.1 */
+        white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+        white-space: -pre-wrap; /* Opera 4-6 */
+        white-space: -o-pre-wrap; /* Opera 7 */
+        word-wrap: break-word; /* Internet Explorer 5.5+ */
+      }
+      .string {
+        color: green;
+      }
+      .number {
+        color: darkorange;
+      }
+      .boolean {
+        color: blue;
+      }
+      .null {
+        color: magenta;
+      }
+      .key {
+        color: red;
+      }
+    </style>
+  </head>
+  <body style="margin-top: 50px">
+    <div style="text-align: center">
+      <button onclick='callJavaScript({"command":"get_phone_numner"})'>
+        Get Phone Number
+      </button>
+      
+      
+            <button onclick='callJavaScript({"command":"check_cellular_network"})'>
+Check Cellular Network
+      </button>
+    </div>
+    <pre id="result"></pre>
+
+    <script>
+      function callJavaScript(params) {
+        // Call Android interface
+        console.log(data);
+        if (window.AnalyticsWebInterface) {
+          window.AnalyticsWebInterface.handleJavaScript(JSON.stringify(params));
+        } else if (
+          window.webkit &&
+          window.webkit.messageHandlers &&
+          window.webkit.messageHandlers.firebase
+        ) {
+          const message = {
+            command: 'handleJavaScript',
+            params: JSON.stringify(data)
+          };
+          // Call iOS interface
+          window.webkit.messageHandlers.firebase.postMessage(message);
+        } else {
+          // No Android or iOS interface found
+          console.log('No native APIs found.');
+        }
+      }
+
+      function callAAAFunction(data) {
+        console.log(data);
+        document.getElementById('result').innerHTML = syntaxHighlight(JSON.stringify(
+          data,
+          null,
+          2
+        ));
+      }
+
+      function syntaxHighlight(json) {
+        json = json
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+        return json.replace(
+          /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+          function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+              if (/:$/.test(match)) {
+                cls = 'key';
+              } else {
+                cls = 'string';
+              }
+            } else if (/true|false/.test(match)) {
+              cls = 'boolean';
+            } else if (/null/.test(match)) {
+              cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+          }
+        );
+      }
+    </script>
+  </body>
+</html>
