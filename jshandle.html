@@ -48,7 +48,7 @@ Check Cellular Network
     <script>
       function callJavaScript(params) {
         // Call Android interface
-        console.log(data);
+        console.log('params', params);
         if (window.AnalyticsWebInterface) {
           window.AnalyticsWebInterface.handleJavaScript(JSON.stringify(params));
         } else if (
@@ -58,7 +58,7 @@ Check Cellular Network
         ) {
           const message = {
             command: 'handleJavaScript',
-            params: JSON.stringify(data)
+            params: JSON.stringify(params)
           };
           // Call iOS interface
           window.webkit.messageHandlers.firebase.postMessage(message);
@@ -68,10 +68,10 @@ Check Cellular Network
         }
       }
 
-      function evaluateFunctionAAA(data) {
-        console.log(data);
+      function evaluateFunctionAAA(payload) {
+        console.log('payload', payload);
         document.getElementById('result').innerHTML = syntaxHighlight(JSON.stringify(
-          data,
+          payload,
           null,
           2
         ));
