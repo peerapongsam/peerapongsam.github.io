@@ -1,9 +1,15 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android",
-    "package_name": "com.pantip.android.Pantip.com",
-    "sha256_cert_fingerprints":
-    ["11:7D:D4:F3:ED:4E:39:52:5A:15:8B:2D:F7:A6:26:32:8E:3A:44:C7:81:11:37:70:E7:71:DE:EC:D4:0F:83:A7"]
+[
+  {
+    "relation" : [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target" : {
+      "namespace" : "android_app",
+      "package_name" : "com.tdcm.trueidsdk.credentialmanager",
+      "sha256_cert_fingerprints" : [
+        "6F:66:67:82:0B:36:22:6B:FC:C5:D6:F4:EC:42:A5:54:0D:E1:9D:3B:92:83:19:1E:21:49:29:7C:AD:47:AD:15"
+      ]
+    }
   }
-}]
+]
