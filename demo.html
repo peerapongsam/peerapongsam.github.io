@@ -99,7 +99,7 @@
         };
 
         const startResponse = await serverPost(
-          `webauthn/signup/start?origin=${encodeURIComponent(document.location.origin)}`,
+          `webauthn/signup/start.json?origin=${encodeURIComponent(document.location.origin)}`,
           user,
         );
         console.log('Received register start response', startResponse);
@@ -111,7 +111,7 @@
         const credentialResponse = encodeCredentialResponse(credential);
         console.log('Sending credential', credentialResponse);
 
-        const finishResponse = await serverPost('webauthn/signup/finish', {
+        const finishResponse = await serverPost('webauthn/signup/finish.json', {
           transactionId: startResponse.transactionId,
           response: credentialResponse,
         });
@@ -120,7 +120,7 @@
 
       async function login(username) {
         const startResponse = await serverPost(
-          `webauthn/signin/start?id=${encodeURIComponent(username)}&origin=${encodeURIComponent(
+          `webauthn/signin/start.json?id=${encodeURIComponent(username)}&origin=${encodeURIComponent(
             document.location.origin,
           )}`,
         );
@@ -133,7 +133,7 @@
         const assertionResponse = encodeAssertionResponse(assertion);
         console.log('Sending assertion', assertionResponse);
 
-        const finishResponse = await serverPost('webauthn/signin/finish', {
+        const finishResponse = await serverPost('webauthn/signin/finish.json', {
           transactionId: startResponse.transactionId,
           response: assertionResponse,
         });
@@ -208,7 +208,7 @@
       /// Utils
 
       async function serverPost(route, params) {
-        const response = await fetch(`https://localhost:443/${route}`, {
+        const response = await fetch(`https://peerapongsam.github.io/${route}`, {
           method: 'POST',
           headers: {
             Accept: 'application/json',
