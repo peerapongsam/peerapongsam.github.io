@@ -11,5 +11,18 @@
         "6F:66:67:82:0B:36:22:6B:FC:C5:D6:F4:EC:42:A5:54:0D:E1:9D:3B:92:83:19:1E:21:49:29:7C:AD:47:AD:15"
       ]
     }
+  },
+  {
+    "relation" : [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target" : {
+      "namespace" : "android_app",
+      "package_name" : "com.truedigital.authentication.simple",
+      "sha256_cert_fingerprints" : [
+        "CC:98:B5:1F:4A:C4:F5:F6:06:35:B3:78:98:A3:1B:70:E9:DF:63:20:15:87:CB:F6:8C:A4:02:C4:CA:05:EE:44"
+      ]
+    }
   }
 ]
